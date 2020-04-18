@@ -1,0 +1,2 @@
+rootProject.name='A_Calculadora_MVVM'
+include ':app'
