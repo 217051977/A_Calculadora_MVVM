@@ -42,38 +42,41 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        super.onCreateView(inflater, container, savedInstanceState)
+        super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
+        Log.e(TAG, "Creating view")
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
         ButterKnife.bind(this, view)
         return view
     }
 
     override fun onStart() {
+        Log.e(TAG, "Starting")
         viewModel.registerListener(this)
         super.onStart()
     }
 
     override fun onDisplayChanged(value: String?) {
+        Log.e(TAG, "Display changing")
         value.let {
             text_visor.text = it
         }
     }
 
     override fun onDestroy() {
+        Log.e(TAG, "Destroying")
         viewModel.unregisterListener()
         super.onDestroy()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.w(TAG, "Historic: ${viewModel.getHistoric().toMutableList().toString()}")
+        Log.e(TAG, "View being created")
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             list_historic.layoutManager = LinearLayoutManager(activity as Context)
-            list_historic.adapter = HistoricAdapter(
+            list_historic.adapter = viewModel.setAdapter(
                 activity as Context,
-                R.layout.historic_page,
-                viewModel.getHistoric().toMutableList()
+                R.layout.fragment_calculator
             )
         }
     }
@@ -94,6 +97,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     )
     fun onClickNumber(view: View) {
         text_visor.text = viewModel.onClickNumber(view.tag.toString())
+        viewModel.makeToast(activity as Context, "Number")
     }
 
     @OnClick(
@@ -101,6 +105,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     )
     fun onClickEquals(view: View) {
         text_visor.text = viewModel.onClickEquals()
+        viewModel.makeToast(activity as Context, "Equals")
     }
 
     /*fun onClickNumber(view: View) {
@@ -139,6 +144,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     )
     fun onClickSymbol(view: View) {
         text_visor.text = viewModel.onClickSymbol(view.tag.toString())
+        viewModel.makeToast(activity as Context, "Symbol")
         /*val symbol = view.tag.toString()
         Log.i(TAG, "Click on button $symbol")
         text_visor.append(symbol)
@@ -155,6 +161,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     fun onClickDot(view: View) {
         Log.i(TAG, "Click on button .")
         text_visor.text = viewModel.onClickDot()
+        viewModel.makeToast(activity as Context, "Dot")
         /*if (!text_visor.text.contains(".")) {
             text_visor.append(".")
             if (hasCalculated) {
@@ -162,7 +169,6 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
             }
         }
         aux = text_visor.text.toString()*/
-        makeToast("button_dot.setOnClickListener at ")
     }
 
     @OnClick(
@@ -171,7 +177,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     fun onClickClear(view: View) {
         Log.i(TAG, "Click on button C")
         text_visor.text = viewModel.onClickClear()
-        makeToast("button_c.setOnClickListener at ")
+        viewModel.makeToast(activity as Context, "Clear")
     }
 
     @OnClick(
@@ -180,15 +186,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     fun onClickDelete(view: View) {
         Log.i(TAG, "Click on button \u232B")
         text_visor.text = viewModel.onClickDelete()
-        makeToast("button_delete.setOnClickListener at ")
-    }
-
-    private fun makeToast(text: String) {
-        Toast.makeText(activity as Context, text +
-                "${Calendar.getInstance().get(Calendar.HOUR_OF_DAY)}:" +
-                "${Calendar.getInstance().get(Calendar.MINUTE)}:" +
-                "${Calendar.getInstance().get(Calendar.SECOND)}",
-            Toast.LENGTH_SHORT).show()
+        viewModel.makeToast(activity as Context, "Delete")
     }
 
 }

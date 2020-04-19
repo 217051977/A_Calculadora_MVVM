@@ -1,9 +1,11 @@
 package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.models
 
+import android.app.Activity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.NavigationManager
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.database.ListStorage
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.objects.Operation
 
