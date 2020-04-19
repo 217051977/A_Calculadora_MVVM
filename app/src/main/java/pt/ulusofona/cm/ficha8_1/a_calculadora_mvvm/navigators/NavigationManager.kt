@@ -1,7 +1,8 @@
-package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm
+package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.navigators
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.R
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.views.fragments.CalculatorFragment
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.views.fragments.HistoricFragment
 

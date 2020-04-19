@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.NavigationManager
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.navigators.NavigationManager
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.R
 
 private val TAG = MainActivity::class.java.simpleName

@@ -4,7 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.NavigationManager
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.navigators.NavigationManager
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.adapters.HistoricAdapter
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.interfaces.OnDisplayChanged
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.models.CalculatorLogic
