@@ -1,10 +1,10 @@
-package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.navigators
+package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.R
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.views.fragments.CalculatorFragment
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.views.fragments.HistoricFragment
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.fragments.CalculatorFragment
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.fragments.HistoricFragment
 
 abstract class NavigationManager {
 

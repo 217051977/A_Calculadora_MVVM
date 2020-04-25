@@ -1,15 +1,17 @@
-package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.models
+package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.models
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.database.ListStorage
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.objects.Operation
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.data.local.list.ListStorage
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.data.local.entities.Operation
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.data.local.room.dao.OperationDao
+import java.util.ArrayList
 
-class CalculatorLogic {
+class CalculatorLogic(private val storage: OperationDao) {
 
-    private val storage = ListStorage.getInstance()
+//    private val storage = ListStorage.getInstance()
 
     fun insertNumber(display: String, number: String) : String {
         return if (display.isEmpty() || (display == number && number == "0")) {
@@ -78,7 +80,11 @@ class CalculatorLogic {
     }
 
     fun getHistoric(): List<Operation> {
-        return storage.getAll()
+        var storageData: List<Operation> = arrayListOf()
+        suspend {
+            storageData = storage.getAll()
+        }
+        return storageData.toList()
     }
 
 }

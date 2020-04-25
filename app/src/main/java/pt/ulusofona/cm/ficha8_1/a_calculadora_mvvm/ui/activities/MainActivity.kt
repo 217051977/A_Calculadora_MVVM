@@ -1,4 +1,4 @@
-package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.views.activities
+package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.activities
 
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.navigators.NavigationManager
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.utils.NavigationManager
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.R
 
 private val TAG = MainActivity::class.java.simpleName
@@ -40,15 +40,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onBackPressed()
     }
 
+    private fun screenRotated(savedInstanceState: Bundle?): Boolean {
+        return savedInstanceState != null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "o método \"onCreate\" foi invocado")
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         setupDrawerMenu()
-        NavigationManager.goToCalculatorFragment(
-            supportFragmentManager
-        )
+
+        if (!screenRotated(savedInstanceState)) {
+            NavigationManager.goToCalculatorFragment(
+                supportFragmentManager
+            )
+        }
 
     }
 

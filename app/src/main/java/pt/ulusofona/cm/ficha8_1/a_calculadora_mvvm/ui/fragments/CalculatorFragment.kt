@@ -1,9 +1,8 @@
-package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.views.fragments
+package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.fragments
 
 import android.content.Context
 import android.content.res.Configuration
 import kotlinx.android.synthetic.main.fragment_calculator.*
-import kotlinx.android.synthetic.main.fragment_calculator.view.text_visor
 
 import android.os.Bundle
 import android.util.Log
@@ -11,18 +10,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
-import kotlinx.android.synthetic.main.fragment_historic.*
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.viewmodels.CalculatorViewModel
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.viewmodels.CalculatorViewModel
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.R
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.adapters.HistoricAdapter
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.interfaces.OnDisplayChanged
-import java.util.*
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.listeners.OnDisplayChanged
 
 private val TAG = CalculatorFragment::class.java.simpleName
 //private var lastCal = "0"
@@ -50,6 +45,14 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.e(TAG, "View being created")
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            updateListHistoric()
+        }
+    }
+
     override fun onStart() {
         Log.e(TAG, "Starting")
         viewModel.registerListener(this)
@@ -67,18 +70,6 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         Log.e(TAG, "Destroying")
         viewModel.unregisterListener()
         super.onDestroy()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.e(TAG, "View being created")
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            list_historic.layoutManager = LinearLayoutManager(activity as Context)
-            list_historic.adapter = viewModel.setAdapter(
-                activity as Context,
-                R.layout.fragment_calculator
-            )
-        }
     }
 
     @Optional
@@ -106,6 +97,9 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     fun onClickEquals(view: View) {
         text_visor.text = viewModel.onClickEquals()
         viewModel.makeToast(activity as Context, "Equals")
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            updateListHistoric()
+        }
     }
 
     /*fun onClickNumber(view: View) {
@@ -187,6 +181,14 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         Log.i(TAG, "Click on button \u232B")
         text_visor.text = viewModel.onClickDelete()
         viewModel.makeToast(activity as Context, "Delete")
+    }
+
+    private fun updateListHistoric() {
+        list_historic.layoutManager = LinearLayoutManager(activity as Context)
+        list_historic.adapter = viewModel.setAdapter(
+            activity as Context,
+            R.layout.item_expression
+        )
     }
 
 }

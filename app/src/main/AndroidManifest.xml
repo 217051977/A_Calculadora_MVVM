@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.views.activities.Login"></activity>
-        <activity android:name="pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.views.activities.Main2Activity"></activity>
-        <activity android:name="pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.views.activities.MainActivity">
+        <activity android:name="pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.activities.Login"></activity>
+        <activity android:name="pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.activities.Main2Activity"></activity>
+        <activity android:name="pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

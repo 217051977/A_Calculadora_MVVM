@@ -1,19 +1,24 @@
-package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.viewmodels
+package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.viewmodels
 
+import android.app.Application
 import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.navigators.NavigationManager
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.adapters.HistoricAdapter
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.interfaces.OnDisplayChanged
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.models.CalculatorLogic
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.objects.Operation
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.utils.NavigationManager
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.adapters.HistoricAdapter
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.listeners.OnDisplayChanged
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.models.CalculatorLogic
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.data.local.entities.Operation
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.data.local.room.CalculatorDatabase
 import java.util.*
 
-class CalculatorViewModel: ViewModel() {
+class CalculatorViewModel(application: Application): AndroidViewModel(application) {
 
-    private val calculatorLogic = CalculatorLogic()
+    private val storage = CalculatorDatabase.getInstance(application as Context).operationDao()
+    private val calculatorLogic = CalculatorLogic(storage)
+
     private var listener: OnDisplayChanged? = null
     var display = ""
 

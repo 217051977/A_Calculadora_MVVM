@@ -1,4 +1,4 @@
-package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.views.activities
+package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

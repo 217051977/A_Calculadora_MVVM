@@ -1,13 +1,14 @@
-package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.adapters
+package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_expression.view.*
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.objects.Operation
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.data.local.entities.Operation
 
 /*
 class HistoricAdapter (
@@ -25,6 +26,8 @@ class HistoricAdapter (
 
 }*/
 
+private val TAG = HistoricAdapter::class.java.simpleName
+
 class HistoricAdapter(
     private val context: Context,
     private val layout: Int,
@@ -39,6 +42,7 @@ class HistoricAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
+        Log.w(TAG, "Creating view holder")
         return HistoryViewHolder(
             LayoutInflater.from(context).inflate(
                 layout,
@@ -49,6 +53,7 @@ class HistoricAdapter(
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
+        Log.w(TAG, "Binding view holder")
         holder.expression.text = items[position].expression
         holder.resoult.text = items[position].result.toString()
     }

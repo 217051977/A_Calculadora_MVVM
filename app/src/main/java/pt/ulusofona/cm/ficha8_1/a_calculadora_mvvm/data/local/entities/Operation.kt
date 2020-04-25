@@ -1,9 +1,13 @@
-package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.objects
+package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.data.local.entities
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.*
 
-class Operation(val expression: String, val result: Double) {
+@Entity
+data class Operation(val expression: String, val result: Double) {
 
+    @PrimaryKey
     var uuid: String = UUID.randomUUID().toString()
 
 //    fun updateList(orientation: Int) {

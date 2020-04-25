@@ -1,4 +1,4 @@
-package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.views.fragments
+package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,7 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_historic.*
 import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.R
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.viewmodels.CalculatorViewModel
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.viewmodels.CalculatorViewModel
 
 /**
  * A simple [Fragment] subclass.

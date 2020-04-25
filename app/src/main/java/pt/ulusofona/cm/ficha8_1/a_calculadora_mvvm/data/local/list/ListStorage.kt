@@ -1,9 +1,9 @@
-package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.mvvm.database
+package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.data.local.list
 
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.objects.Operation
+import pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.data.local.entities.Operation
 
 class ListStorage private constructor() {
 
@@ -22,7 +22,8 @@ class ListStorage private constructor() {
 //                verifica se ainda nao foi criada uma instancia
                 if (instance == null) {
 //                    cria uma instancia
-                    instance = ListStorage()
+                    instance =
+                        ListStorage()
                 }
 //                retorna a instancia
                 return instance as ListStorage
@@ -34,7 +35,7 @@ class ListStorage private constructor() {
     suspend fun insert(operation: Operation) {
         withContext(Dispatchers.IO) {
 //            espera 30s
-//            Thread.sleep(30000)
+            Thread.sleep(30000)
 //            adiciona a operação a variavel storage
             storage.add(operation)
 //            debug
