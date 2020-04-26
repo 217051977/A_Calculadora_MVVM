@@ -42,7 +42,7 @@ class HistoricAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
-        Log.w(TAG, "Creating view holder")
+        Log.e(TAG, "Creating view holder")
         return HistoryViewHolder(
             LayoutInflater.from(context).inflate(
                 layout,
@@ -53,7 +53,7 @@ class HistoricAdapter(
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        Log.w(TAG, "Binding view holder")
+        Log.e(TAG, "Binding view holder")
         holder.expression.text = items[position].expression
         holder.resoult.text = items[position].result.toString()
     }

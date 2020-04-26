@@ -71,12 +71,6 @@ class CalculatorViewModel(application: Application): AndroidViewModel(applicatio
         return display
     }
 
-    fun getHistoric(): List<Operation> {
-        val historic = calculatorLogic.getHistoric()
-        notifyOnDisplayChanged()
-        return historic
-    }
-
     fun backToCalculatorFragment(activity: FragmentActivity?) {
         NavigationManager.goToCalculatorFragment(
             activity?.supportFragmentManager!!

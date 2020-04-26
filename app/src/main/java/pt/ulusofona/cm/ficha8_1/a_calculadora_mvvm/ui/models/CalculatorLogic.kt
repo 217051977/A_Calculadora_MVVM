@@ -1,5 +1,6 @@
 package pt.ulusofona.cm.ficha8_1.a_calculadora_mvvm.ui.models
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -66,9 +67,14 @@ class CalculatorLogic(private val storage: OperationDao) {
     }
 
     fun preformOperation(expression: String) : Double {
-        val expressionBuilder = ExpressionBuilder(expression).build()
+        val expressionBuilder = if (expression == "") {
+            ExpressionBuilder("0+0").build()
+        } else {
+            ExpressionBuilder(expression).build()
+        }
         val result = expressionBuilder.evaluate()
         CoroutineScope(Dispatchers.IO).launch {
+            Log.e(this::class.java.simpleName, "Inserting")
             storage.insert(
                 Operation(
                     expression,
@@ -76,14 +82,24 @@ class CalculatorLogic(private val storage: OperationDao) {
                 )
             )
         }
+        Log.e(this::class.java.simpleName, "Returning result")
         return result
     }
 
     fun getHistoric(): List<Operation> {
+//        declara a variavel storaData
         var storageData: List<Operation> = arrayListOf()
-        suspend {
+        CoroutineScope(Dispatchers.IO).launch {
+//            debug (esta como error para puder identificar melhor)
+            Log.e(this::class.java.simpleName, "Inside the thread")
+//            atualiza o valor da variavel com o a lista de operações existentes na base de dados
             storageData = storage.getAll()
+//            outro debug
+            Log.e(this::class.java.simpleName, "StorageData inside the thread: $storageData")
         }
+//        outro debug
+        Log.e(this::class.java.simpleName, "StorageData: $storageData")
+//        retorna o valor da lista storageData como lista
         return storageData.toList()
     }
 

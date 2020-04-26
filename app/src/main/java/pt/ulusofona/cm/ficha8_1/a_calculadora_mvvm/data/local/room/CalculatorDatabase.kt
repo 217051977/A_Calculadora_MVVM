@@ -18,7 +18,7 @@ abstract class CalculatorDatabase: RoomDatabase() {
         private var instance: CalculatorDatabase? = null
 
         fun getInstance(applicationContext: Context): CalculatorDatabase {
-            Log.w(this::class.java.simpleName, "Creating a Calculator Database instance")
+            Log.e(this::class.java.simpleName, "Creating a Calculator Database instance")
             synchronized(this) {
                 if (instance == null) {
                     instance = Room.databaseBuilder(
